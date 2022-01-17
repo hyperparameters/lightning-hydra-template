@@ -36,6 +36,8 @@ class SimpleLitModule(pl.LightningModule):
             value = metric(preds, targets)
             self.log(f"train/{name}", value, on_step=False, on_epoch=True, prog_bar=True)
 
+        return {"loss": loss, "preds": preds, "targets": targets}
+
     def training_epoch_end(self, outputs: List[Any]):
         # `outputs` is a list of dicts returned from `training_step()`
         pass
@@ -48,6 +50,7 @@ class SimpleLitModule(pl.LightningModule):
         for name, metric in self.metrics.val.items():
             value = metric(preds, targets)
             self.log(f"val/{name}", value, on_step=False, on_epoch=True, prog_bar=True)
+        return {"loss": loss, "preds": preds, "targets": targets}
 
     def validation_epoch_end(self, outputs: List[Any]):
         pass
