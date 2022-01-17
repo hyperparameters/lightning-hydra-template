@@ -1,0 +1,39 @@
+defaults:
+  - datamodule: default
+  - lightning_module/model: default
+  - lightning_module/optimizer: default
+  - lightning_module/loss: default
+  - lightning_module/metrics: default
+  - trainer: default
+  - callbacks: default.yaml
+  - logger: null # set logger here or use command line (e.g. `python run.py logger=wandb`)
+
+  # modes are special collections of config options for different purposes, e.g. debugging
+  - mode: default.yaml
+
+  # # enable color logging
+  # - override hydra/hydra_logging: colorlog
+  # - override hydra/job_logging: colorlog
+
+
+
+lightning_module:
+  _target_: ???
+
+# path to original working directory
+# hydra hijacks working directory by changing it to the new log directory
+# so it's useful to have this path as a special variable
+# https://hydra.cc/docs/next/tutorials/basic/running_your_app/working_directory
+work_dir: ${hydra:runtime.cwd}
+
+# path to folder with data
+data_dir: ${work_dir}/data/
+
+# Name of the experiment 
+exp_name: ???
+
+# Unique ID to save the config and recreate experiment
+run_id: ???
+
+# Details about the experiment
+run_details: ???

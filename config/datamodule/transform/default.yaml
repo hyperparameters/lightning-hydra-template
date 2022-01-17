@@ -1,0 +1,7 @@
+_target_: torchvision.transforms.transforms.Compose
+transforms:
+  - _target_: torchvision.transforms.transforms.ToTensor
+  - _target_: torchvision.transforms.transforms.Normalize
+    _args_: 
+      - [0.1307,]
+      - [0.3081,]

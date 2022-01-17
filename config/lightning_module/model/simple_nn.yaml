@@ -1,0 +1,7 @@
+_target_: src.models.SimpleNN
+input_size: 784
+hidden_layers:
+  - 256
+  - 256
+  - 256
+output_size: 10

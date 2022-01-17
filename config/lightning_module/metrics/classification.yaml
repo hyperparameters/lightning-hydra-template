@@ -1,0 +1,7 @@
+train: 
+  accuracy:
+    _target_: torchmetrics.classification.accuracy.Accuracy
+val: 
+  accuracy:
+    _target_: torchmetrics.classification.accuracy.Accuracy
+  

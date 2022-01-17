@@ -1,0 +1,32 @@
+defaults:
+  - transform@train.dataloader.dataset.transform: default
+  - transform@val.dataloader.dataset.transform: default
+
+_target_: src.datamodules.DataModule
+train:
+  dataloader:
+    _target_: torch.utils.data.DataLoader
+    dataset:
+      _target_: torchvision.datasets.MNIST
+      root: ${data_dir}
+      train: true
+      download: true
+    batch_size: 4
+    num_workers: 2
+    pin_memory: false
+    shuffle: true
+val:
+  dataloader:
+    _target_: torch.utils.data.DataLoader
+    dataset:
+      _target_: torchvision.datasets.MNIST
+      root: ${data_dir}
+      train: false
+      download: true
+    batch_size: 4
+    num_workers: 1
+    pin_memory: false
+    shuffle: false
+test: 
+    
+

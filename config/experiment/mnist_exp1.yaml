@@ -1,0 +1,26 @@
+# @package _global_
+
+defaults:
+  - override /datamodule:  mnist
+  - override /lightning_module/loss: cross_entropy
+  - override /lightning_module/optimizer: adam
+  - override /lightning_module/model: simple_nn
+  - override /lightning_module/metrics: classification
+  - override /logger: null
+  - override /mode: exp
+
+lightning_module:
+  _target_: src.lightning_modules.simple.SimpleLitModule
+
+trainer:
+  min_epochs: 1
+  max_epochs: 10
+  gradient_clip_val: 0.5
+
+exp_name: "mnist_exp1"
+
+logger:
+  csv:
+    name: csv/${name}
+  wandb:
+    tags: ["mnist", "simple_dense_net"]
