@@ -1,0 +1,9 @@
+datatset:
+  img_size: [20,20]
+  batch: 23
+
+train:
+  epoch: 120
+  lr: 200
+  optimizer: Adam
+

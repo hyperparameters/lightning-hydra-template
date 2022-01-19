@@ -1,0 +1,55 @@
+datamodule:
+  _target_: src.datamodules.DataModule
+  train:
+    dataloader:
+      _target_: torch.utils.data.DataLoader
+      dataset:
+        _target_: torchvision.datasets.MNIST
+        root: ${dataroot}
+        train: true
+        download: true
+      batch_size: 4
+      num_workers: 2
+      pin_memory: false
+      shuffle: true
+  val:
+    dataloader:
+      _target_: torch.utils.data.DataLoader
+      dataset:
+        _target_: torchvision.datasets.MNIST
+        root: ${dataroot}
+        train: false
+        download: true
+      batch_size: 4
+      num_workers: 1
+      pin_memory: false
+      shuffle: false
+  test: null
+lightning_module:
+  model:
+    _target_: src.models.SimpleNN
+    input_size: 784
+    hidden_layers:
+    - 256
+    - 256
+    - 256
+    output_size: 10
+  optimizer:
+    _target_: src.wrappers.OptimizerWrapper
+    name: Adam
+    lr: 0.001
+    weight_decay: 0
+  loss:
+    _target_: torch.nn.CrossEntropyLoss
+  metrics:
+    train:
+      accuracy:
+        _target_: torchmetrics.classification.accuracy.Accuracy
+    val:
+      accuracy:
+        _target_: torchmetrics.classification.accuracy.Accuracy
+  _target_: src.lightning_modules.simple.SimpleLitModule
+dataroot: /home/tushar/hdd/My/learning/hydra/lightning-hydra-template/dataset
+exp_name: ???
+run_id: ???
+run_details: ???
