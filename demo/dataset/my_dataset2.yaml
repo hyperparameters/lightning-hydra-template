@@ -1,0 +1,3 @@
+_target_: src.demo_class.Dataset
+img_size: [20,20]
+batch: 23

@@ -1,0 +1,4 @@
+_target_: src.demo_class.Train
+epoch: 120
+lr: 200
+optimizer: Adam

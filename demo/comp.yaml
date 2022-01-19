@@ -1,0 +1,3 @@
+defaults:
+  - train: my_train
+  - dataset: my_dataset
