@@ -1,0 +1,41 @@
+_target_: src.datamodules.DataModule
+train:
+  dataloader:
+    _target_: torch.utils.data.DataLoader
+    dataset:
+      _target_: src.datasets.segmentation.SegmentationDataset
+      root: ${data_dir}
+      phase: train
+      transform:
+        _target_: torchvision.transforms.transforms.Compose
+        transforms:
+          - _target_: src.transforms.u2net_transforms.RescaleT
+            _args_:
+              - 600
+          - _target_: src.transforms.u2net_transforms.RandomCrop
+            _args_:
+              - 512
+          - _target_: src.transforms.u2net_transforms.ToTensorNorm
+    batch_size: 1
+    num_workers: 2
+    pin_memory: false
+    shuffle: true
+val:
+  dataloader:
+    _target_: torch.utils.data.DataLoader
+    dataset:
+      _target_: src.datasets.segmentation.SegmentationDataset
+      root: ${data_dir}
+      phase: val
+      transform:
+        _target_: torchvision.transforms.transforms.Compose
+        transforms:
+          - _target_: src.transforms.u2net_transforms.RescaleT
+            _args_:
+              - 512
+          - _target_: src.transforms.u2net_transforms.ToTensorNorm
+    batch_size: 1
+    num_workers: 1
+    pin_memory: false
+    shuffle: false
+test:

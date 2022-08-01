@@ -1,0 +1,17 @@
+bce_loss:
+  _target_: torch.nn.BCELoss
+alpha_loss:
+  _target_: src.losses.matting.AlphaLoss
+alpha_window_loss:
+  _target_: src.losses.matting.AlphaLoss
+composition_loss:
+  _target_: src.losses.matting.CompositionLoss
+rgb_loss:
+  _target_: src.losses.matting.AlphaLoss
+loss_weight:
+  bce_loss: 20
+  alpha_loss: 20
+  alpha_window_loss: 30
+  composition_loss: 10
+  rgb_loss: 20
+  rgb_window_loss: 30
